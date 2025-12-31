@@ -1,0 +1,14 @@
+# Tracko - Run Single Camera
+# Usage examples:
+
+# Bus 12A with webcam (camera 0)
+python crowd_detection.py --vehicle-id 12A --video-source 0 --interval 2
+
+# Bus 45C with external camera (camera 1) 
+# python crowd_detection.py --vehicle-id 45C --video-source 1 --interval 2
+
+# Bus 21G with video file (for testing)
+# python crowd_detection.py --vehicle-id 21G --video-source videos/bus21g.mp4 --interval 2
+
+# Bus 570 with IP camera (RTSP stream)
+# python crowd_detection.py --vehicle-id 570 --video-source rtsp://192.168.1.100:554/stream --interval 2

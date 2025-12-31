@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Timeline Test</title>
+</head>
+
+<body>
+    <h1>Route Timeline Test</h1>
+    <div id="route-timeline"></div>
+
+    <script>
+        async function loadTimeline() {
+            const busId = '12A';
+            const container = document.getElementById('route-timeline');
+
+            console.log('Loading timeline for bus:', busId);
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/routes/${busId}/stops`);
+                const data = await response.json();
+                console.log('Data received:', data);
+
+                if (data && data.stops) {
+                    container.innerHTML = data.stops.map((stop, index) => {
+                        return `
+                            <div style="padding: 10px; border-left: 2px solid #ccc; margin-bottom: 10px;">
+                                <strong>${stop.sequence}. ${stop.name}</strong>
+                                <p>Distance: ${stop.distance} km | Time: ${stop.time} min</p>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = '<p>No data</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                container.innerHTML = '<p>Error loading: ' + error.message + '</p>';
+            }
+        }
+
+        // Load on page ready
+        window.onload = () => {
+            loadTimeline();
+        };
+    </script>
+</body>
+
+</html>
